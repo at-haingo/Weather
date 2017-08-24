@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="wind"
+            type="com.example.quanghai.weather.model.Wind" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#83450808">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/wind"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/tvTitle"
+            android:background="#fff" />
+
+        <ImageView
+            android:id="@+id/imgFan"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/view"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_fan" />
+
+        <TextView
+            android:id="@+id/tvWind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_toEndOf="@+id/imgFan"
+            android:layout_toRightOf="@+id/imgFan"
+            android:text="@{Float.toString(wind.speed)}"
+            android:textColor="#fff"
+            tools:text="aa" />
+
+
+        <TextView
+            android:id="@+id/tvDegrees"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWind"
+            android:layout_toEndOf="@+id/imgFan"
+            android:layout_toRightOf="@+id/imgFan"
+            android:text="@{Float.toString(wind.degrees)}"
+            android:textColor="#fff" />
+
+    </RelativeLayout>
+</layout>
+
