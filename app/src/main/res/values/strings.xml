@@ -2,6 +2,16 @@
     <string name="app_name">Weather</string>
     <string name="detail">Chi tiết</string>
     <string name="appid">6089dec917ce86e133c59ced3cbb728a</string>
-    <string name="temperature">Nhiệt độ %$1s</string>
+    <string name="temperature">Nhiệt độ:</string>
     <string name="wind">Gió và Áp suất</string>
+    <string name="sun_moon">Mặt trời và mặt trăng</string>
+    <string name="humidity">Độ ẩm:</string>
+    <string name="pressure">Áp suất:</string>
+    <string name="temp_min">Min:</string>
+    <string name="temp_max">Max:</string>
+    <string name="wind_speed">Tốc độ gió</string>
+    <string name="wind_degrees">Hướng gió</string>
+    <string name="input_city">Nhập thành phố</string>
+    <string name="rain">Lượng mưa</string>
+    <string name="my_location">Địa điểm hiện thời</string>
 </resources>

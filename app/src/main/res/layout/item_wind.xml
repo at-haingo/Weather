@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="wind"
-            type="com.example.quanghai.weather.model.Wind" />
+            type="com.example.model.Wind" />
     </data>
 
     <RelativeLayout
@@ -23,7 +22,7 @@
             android:padding="5dp"
             android:text="@string/wind"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <View
             android:id="@+id/view"
@@ -32,35 +31,80 @@
             android:layout_below="@+id/tvTitle"
             android:background="#fff" />
 
-        <ImageView
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/imgFan"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_below="@+id/view"
             android:contentDescription="@null"
-            android:src="@drawable/ic_fan" />
+            android:src="@drawable/ic_windmill" />
 
-        <TextView
-            android:id="@+id/tvWind"
+        <LinearLayout
+            android:id="@+id/llSpeed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view"
             android:layout_toEndOf="@+id/imgFan"
             android:layout_toRightOf="@+id/imgFan"
-            android:text="@{Float.toString(wind.speed)}"
-            android:textColor="#fff"
-            tools:text="aa" />
+            android:padding="5dp">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/wind_speed"
+                android:textColor="#fff"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvDegrees"
+            <TextView
+                android:id="@+id/tvWind"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@{String.valueOf(wind.speed) + `m/s`}"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/dotLine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvWind"
+            android:layout_below="@+id/llSpeed"
+            android:layout_height="2dp"
             android:layout_toEndOf="@+id/imgFan"
             android:layout_toRightOf="@+id/imgFan"
-            android:text="@{Float.toString(wind.degrees)}"
-            android:textColor="#fff" />
+            android:background="@drawable/custom_dot_line"
+            android:layerType="software"/>
+
+        <LinearLayout
+            android:id="@+id/llDegrees"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dotLine"
+            android:layout_toEndOf="@+id/imgFan"
+            android:layout_toRightOf="@+id/imgFan"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/wind_degrees"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvDegrees"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@{String.valueOf((int)wind.degrees)}"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </LinearLayout>
+
 
     </RelativeLayout>
 </layout>

@@ -8,31 +8,32 @@
 
         <variable
             name="data"
-            type="com.example.quanghai.weather.model.Data" />
+            type="com.example.model.Data" />
+
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_dn">
+        android:background="@drawable/bg_dn"
+        android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@{data.name}"
+            android:title="@{data.name}"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:titleTextColor="#fff" />
 
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar">
+            android:layout_height="match_parent">
 
             <android.support.design.widget.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/appBarLayout"
                 android:background="@null"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -49,9 +50,9 @@
                     app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
                     <RelativeLayout
+                        android:id="@+id/rlTitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/rlTitle"
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp">
@@ -61,7 +62,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
-                            android:text="@{String.valueOf((int)(data.main.temperature - 273.15f))}"
+                            android:text="@{String.valueOf((int)(data.main.temperature - 273.15f)) + `°`}"
                             android:textColor="#fff"
                             android:textSize="80sp"
                             tools:text="20" />
@@ -71,7 +72,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_above="@+id/tvTemperature"
-                            android:text="@{String.valueOf((int)(data.main.tempMax - 273.15f))}"
+                            android:text="@{String.valueOf((int)(data.main.tempMax - 273.15f)) + `°`}"
                             android:textColor="#fff"
                             android:textSize="20sp"
                             tools:text="18" />
@@ -83,7 +84,7 @@
                             android:layout_above="@+id/tvTemperature"
                             android:layout_alignEnd="@+id/tvTemperature"
                             android:layout_alignRight="@+id/tvTemperature"
-                            android:text="@{String.valueOf((int)(data.main.tempMin - 273.15f))}"
+                            android:text="@{String.valueOf((int)(data.main.tempMin - 273.15f)) + `°`}"
                             android:textColor="#fff"
                             android:textSize="20sp"
                             tools:text="13" />
@@ -93,7 +94,8 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_above="@+id/tvTempMax"
-                            android:contentDescription="@null" />
+                            android:contentDescription="@null"
+                            app:imageUrl="@{data.weathers.get(0).icon}" />
 
                         <TextView
                             android:id="@+id/tvDescription"
@@ -123,18 +125,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <include layout="@layout/item_forecast" />
+
                     <include
                         layout="@layout/item_detail"
-                        bind:main="@{data.main}" />
+                        bind:data="@{data}" />
 
                     <include
                         layout="@layout/item_wind"
                         bind:wind="@{data.wind}" />
 
+                    <include layout="@layout/item_sun_moon" />
+
                 </LinearLayout>
 
             </android.support.v4.widget.NestedScrollView>
         </android.support.design.widget.CoordinatorLayout>
-    </RelativeLayout>
+
+    </LinearLayout>
 
 </layout>

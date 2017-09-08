@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="main"
-            type="com.example.quanghai.weather.model.Main" />
+            name="data"
+            type="com.example.model.Data" />
     </data>
 
     <RelativeLayout
@@ -23,7 +24,7 @@
             android:padding="5dp"
             android:text="@string/detail"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <View
             android:id="@+id/view"
@@ -36,58 +37,174 @@
             android:id="@+id/imgIcon"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_below="@+id/view"
-            android:contentDescription="@null" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvDetail"
+            android:contentDescription="@null"
+            app:imageUrl="@{data.weathers.get(0).icon}" />
 
-        <TextView
-            android:id="@+id/tvTemperature"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view"
-            android:layout_toEndOf="@+id/imgIcon"
-            android:layout_toRightOf="@+id/imgIcon"
-            android:text="@{`Nhiệt độ ` + String.valueOf((int)(main.temperature - 273.15f))}"
-            android:textColor="#fff" />
+            android:layout_below="@+id/tvDetail"
+            android:layout_toEndOf="@id/imgIcon"
+            android:layout_toRightOf="@id/imgIcon"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvHumidity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTemperature"
-            android:layout_toEndOf="@+id/imgIcon"
-            android:layout_toRightOf="@+id/imgIcon"
-            android:text="@{`Độ ẩm ` + main.humidity}"
-            android:textColor="#fff" />
+            <LinearLayout
+                android:id="@+id/llTemperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
 
-        <TextView
-            android:id="@+id/tvPressure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvHumidity"
-            android:layout_toEndOf="@+id/imgIcon"
-            android:layout_toRightOf="@+id/imgIcon"
-            android:textColor="#fff"
-            tools:text="@{`Áp suất ` + main.pressure}" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/temperature"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvTempMin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvPressure"
-            android:layout_toEndOf="@+id/imgIcon"
-            android:layout_toRightOf="@+id/imgIcon"
-            android:text="@{`Min ` + String.valueOf((int)(main.tempMin - 273.15f))}"
-            android:textColor="#fff" />
+                <TextView
+                    android:id="@+id/tvTemperature"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{String.valueOf((int)(data.main.temperature - 273.15f)) + `°`}"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvTempMax"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTempMin"
-            android:layout_toEndOf="@+id/imgIcon"
-            android:layout_toRightOf="@+id/imgIcon"
-            android:text="@{`Max ` + String.valueOf((int)(main.tempMax - 273.15f))}"
-            android:textColor="#fff" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/custom_dot_line"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:id="@+id/llHumidity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/humidity"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvHumidity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{String.valueOf((int)data.main.humidity)}"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/custom_dot_line"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:id="@+id/llPressure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/pressure"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvPressure"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    tools:text="@{String.valueOf((int)data.main.pressure)}" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/custom_dot_line"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:id="@+id/llTempMin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/temp_min"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvTempMin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{String.valueOf((int)(data.main.tempMin - 273.15f)) + `°C`}"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/custom_dot_line"
+                android:layerType="software" />
+
+            <LinearLayout
+                android:id="@+id/llTempMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/temp_max"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvTempMax"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@{String.valueOf((int)(data.main.tempMax - 273.15f)) + `°`}"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
 
     </RelativeLayout>
 </layout>
